@@ -34,7 +34,7 @@ def monthly_mortgage_in_eur():
     return loan*(interest_rate**duration_in_years)/(12*interest_poly)
 
 def monthly_equity_return_in_eur():
-    return (value_in_eur * (1 - agent_fee*1.22))/(12*duration_in_years)
+    return value_in_eur/(12*duration_in_years)
 
 def main():
     initiation_c = initiation_cost_in_eur()
