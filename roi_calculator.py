@@ -11,7 +11,7 @@ operation_cost = 130
 notary_fee_in_eur = 3000
 agent_fee = .03
 # taxes
-local_rent_tax_rate = .2
+local_rent_tax_rate = .21
 annual_property_tax_in_eur = 1000
 
 def tax_registration():
