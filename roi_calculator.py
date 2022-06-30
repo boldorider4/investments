@@ -1,31 +1,37 @@
 # purchase
-value_in_eur = 155000
-down_payment_in_eur = 50000
+value_in_eur = 230000 + 7500        # initial price + restoration, furniture, etc.
+down_payment_in_eur = 75000
 # mortgage
-duration_in_years = 30
-interest_rate = 1.018
+duration_in_years = 35
+interest_rate = 1.03                # meaning 3% on top, as in <loan> x 103%
 # rental
-rent_in_eur = 700
-operation_cost = 130
+operation_cost = 2000/12            # annual operation cost converted to monthly
+rent_in_eur = 1200 + operation_cost
 # fees
-notary_fee_in_eur = 3000
-agent_fee = .03
+notary_fee_in_eur = 4500            # usually a percent, here it's static
+agent_fee = .03                     # meaning 3% (vat is calculated afterwards)
 # taxes
-local_rent_tax_rate = .21
-annual_property_tax_in_eur = 1000
+local_rent_tax_rate = .21           # meaning 21%, it taxes profit after deduction of costs
+annual_property_tax_in_eur = 1000   # grundsteuer, imu, etc.
+local_registration_tax_rate = 1.09  # meaning 9%, as in <value> x 109%
 
+# taxes the property
 def tax_registration():
-    return 1.035*value_in_eur + 200
+    return local_registration_tax_rate*value_in_eur
 
+# taxes property and applies inital fees
 def gross_property_cost_in_eur():
     return tax_registration() + notary_fee_in_eur + agent_fee*1.22*value_in_eur
 
+# money purely lost upon investing (used to calculate recoup time)
 def initiation_cost_in_eur():
     return gross_property_cost_in_eur() - value_in_eur
 
+# how much property you own upon investing 
 def initial_equity_in_eur():
     return down_payment_in_eur - initiation_cost_in_eur()
 
+# used to calculate monthly mortgage cost
 def monthly_mortgage_in_eur():
     loan = gross_property_cost_in_eur() - down_payment_in_eur
     interest_poly = 0
@@ -33,6 +39,7 @@ def monthly_mortgage_in_eur():
         interest_poly += interest_rate**n
     return loan*(interest_rate**duration_in_years)/(12*interest_poly)
 
+# how much property you accrue in a month (to be scaled by  market fluctuation)
 def monthly_equity_return_in_eur():
     return value_in_eur/(12*duration_in_years)
 
