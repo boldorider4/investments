@@ -9,11 +9,12 @@ operation_cost = 2000/12            # annual operation cost converted to monthly
 rent_in_eur = 1200 + operation_cost
 # fees
 notary_fee_in_eur = 4500            # usually a percent, here it's static
-agent_fee = .03                     # meaning 3% (vat is calculated afterwards)
+agent_fee = .03                     # meaning 3% (vat is applied afterwards)
 # taxes
 local_rent_tax_rate = .21           # meaning 21%, it taxes profit after deduction of costs
 annual_property_tax_in_eur = 1000   # grundsteuer, imu, etc.
 local_registration_tax_rate = 1.09  # meaning 9%, as in <value> x 109%
+local_vat = 1.22                    # meaning 22% as in <value> x 122%
 
 # taxes the property
 def tax_registration():
@@ -21,7 +22,7 @@ def tax_registration():
 
 # taxes property and applies inital fees
 def gross_property_cost_in_eur():
-    return tax_registration() + notary_fee_in_eur + agent_fee*1.22*value_in_eur
+    return tax_registration() + notary_fee_in_eur + agent_fee*local_vat*value_in_eur
 
 # money purely lost upon investing (used to calculate recoup time)
 def initiation_cost_in_eur():
