@@ -1,18 +1,18 @@
 # purchase
-value_in_eur = 230000 + 7500        # initial price + restoration, furniture, etc.
-down_payment_in_eur = 75000
+value_in_eur = 350000               # initial price + restoration, furniture, etc.
+down_payment_in_eur = 80000
 # mortgage
-duration_in_years = 35
-interest_rate = 1.03                # meaning 3% on top, as in <loan> x 103%
+duration_in_years = 30
+interest_rate = 1.035               # meaning 3.5% on top, as in <loan> x 103.5%
 # rental
-operation_cost = 2000/12            # annual operation cost converted to monthly
-rent_in_eur = 1200 + operation_cost
+operation_cost = 2500/12            # annual operation cost converted to monthly
+rent_in_eur = (1100*22 + 500*6)/12  # airbnb model: <hi-season-net> x 6 months + <lo-season-net> x 6 months
 # fees
-notary_fee_in_eur = 4500            # usually a percent, here it's static
+notary_fee_in_eur = 7000            # usually a percent, here it's static
 agent_fee = .03                     # meaning 3% (before vat)
 # taxes
 local_rent_tax_rate = .21           # meaning 21%, it taxes profit after deduction of costs
-annual_property_tax_in_eur = 1000   # grundsteuer, imu, etc.
+annual_property_tax_in_eur = 2000   # grundsteuer, imu, etc.
 local_registration_tax_rate = 1.09  # meaning 9%, as in <value> x 109%
 local_vat = 1.22                    # meaning 22% as in <value> x 122%
 
